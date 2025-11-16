@@ -8,7 +8,8 @@ import jakarta.persistence.*;
 @Table(name = "employees")
 public class Employee {
     @Id
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column(name = "first_name",nullable = false)
     private String firstname;
     @Column(name ="last_name")
@@ -19,18 +20,18 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(int id, String firstname, String lastname, String email) {
+    public Employee(Long id, String firstname, String lastname, String email) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
