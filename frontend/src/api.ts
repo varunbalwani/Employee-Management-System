@@ -8,7 +8,8 @@ export interface Employee {
   email: string;
 }
 
-const API_BASE_URL = "http://localhost:8080/api/employee";
+const API_BASE_URL =
+  "https://employee-management-system-backend-latest-xyx1.onrender.com/api/employee";
 
 const apiService = {
   getAllEmployees: () => {
