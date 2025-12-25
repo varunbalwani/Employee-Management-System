@@ -5,15 +5,17 @@ public class DtoEmployee {
     private String firstname;
     private String lastname;
     private String email;
+    private String createdBy;
 
     public DtoEmployee() {
     }
 
-    public DtoEmployee(Long id, String firstname, String lastname, String email) {
+    public DtoEmployee(Long id, String firstname, String lastname, String email, String createdBy) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
+        this.createdBy = createdBy;
     }
 
     public Long getId() {
@@ -46,5 +48,13 @@ public class DtoEmployee {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
     }
 }

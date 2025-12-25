@@ -2,20 +2,22 @@ package com.example.EmployeeManagementSystem.model;
 
 import jakarta.persistence.*;
 
-
-
 @Entity
 @Table(name = "employees")
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "first_name",nullable = false)
+    @Column(name = "first_name", nullable = false)
     private String firstname;
-    @Column(name ="last_name")
+    @Column(name = "last_name")
     private String lastname;
-    @Column(name = "email",nullable = false)
+    @Column(name = "email", nullable = false)
     private String email;
+
+    @ManyToOne
+    @JoinColumn(name = "created_by_id")
+    private User createdBy;
 
     public Employee() {
     }
@@ -57,5 +59,13 @@ public class Employee {
 
     public String getEmail() {
         return email;
+    }
+
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
     }
 }
