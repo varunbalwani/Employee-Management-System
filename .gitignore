@@ -1,1 +1,6 @@
 .env
+
+target/
+build/
+node_modules/
+dist/
