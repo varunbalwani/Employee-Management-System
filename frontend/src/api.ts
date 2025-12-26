@@ -9,8 +9,10 @@ export interface Employee {
   createdBy?: string;
 }
 
-const API_BASE_URL = "http://localhost:8080/api/employee";
-const AUTH_URL = "http://localhost:8080/api/auth";
+// Get base URL from environment variable, fallback to localhost for local development
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080";
+const API_BASE_URL = `${BASE_URL}/api/employee`;
+const AUTH_URL = `${BASE_URL}/api/auth`;
 
 // Add a request interceptor
 axios.interceptors.request.use(
