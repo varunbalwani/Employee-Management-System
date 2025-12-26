@@ -6,10 +6,28 @@ export interface Employee {
   firstname: string;
   lastname: string;
   email: string;
+  createdBy?: string;
 }
 
-const API_BASE_URL =
-  "https://employee-management-system-backend-latest-xyx1.onrender.com/api/employee";
+const API_BASE_URL = "http://localhost:8080/api/employee";
+const AUTH_URL = "http://localhost:8080/api/auth";
+
+// Add a request interceptor
+axios.interceptors.request.use(
+  (config) => {
+    const userStr = localStorage.getItem("user");
+    if (userStr) {
+      const user = JSON.parse(userStr);
+      if (user.accessToken) {
+        config.headers.Authorization = `Bearer ${user.accessToken}`;
+      }
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 const apiService = {
   getAllEmployees: () => {
@@ -30,6 +48,14 @@ const apiService = {
 
   deleteEmployee: (id: number) => {
     return axios.delete(`${API_BASE_URL}/${id}`);
+  },
+
+  login: (data: any) => {
+    return axios.post(`${AUTH_URL}/login`, data);
+  },
+
+  register: (data: any) => {
+    return axios.post(`${AUTH_URL}/register`, data);
   },
 };
 

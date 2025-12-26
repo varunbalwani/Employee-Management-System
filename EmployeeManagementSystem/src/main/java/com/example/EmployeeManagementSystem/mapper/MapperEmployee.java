@@ -29,6 +29,9 @@ public class MapperEmployee {
         dto.setFirstname(employee.getFirstname());
         dto.setLastname(employee.getLastname());
         dto.setEmail(employee.getEmail());
+        if (employee.getCreatedBy() != null) {
+            dto.setCreatedBy(employee.getCreatedBy().getUsername());
+        }
 
         return dto;
     }
