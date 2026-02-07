@@ -13,8 +13,8 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 
-# Stage 2: Run minimal JRE image (very small)
-FROM eclipse-temurin:17-jre-alpine
+# Stage 2: Run minimal JRE image (supports ARM64 and AMD64)
+FROM eclipse-temurin:17-jre
 WORKDIR /app
 
 # Copy the jar from the build stage

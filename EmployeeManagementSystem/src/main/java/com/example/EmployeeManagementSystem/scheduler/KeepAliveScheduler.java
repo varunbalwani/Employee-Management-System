@@ -1,11 +1,13 @@
 package com.example.EmployeeManagementSystem.scheduler;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 @Component
+@ConditionalOnProperty(name = "scheduler.keepalive.enabled", havingValue = "true", matchIfMissing = false)
 public class KeepAliveScheduler {
 
     @Value("${RENDER_EXTERNAL_URL:http://localhost:8080}")
@@ -13,7 +15,7 @@ public class KeepAliveScheduler {
 
     private final RestTemplate restTemplate = new RestTemplate();
 
-    @Scheduled(fixedRate = 600000) // 10 minutes in milliseconds
+    @Scheduled(fixedRate = 600000, initialDelay = 60000) // 10 minutes rate, 1 minute initial delay
     public void pingSelf() {
         try {
             String healthUrl = appUrl + "/health";
